@@ -32,3 +32,6 @@ build/
 *.swp
 .DS_Store
 /tmp/
+
+# Eclipse .metadata folder
+.metadata/
