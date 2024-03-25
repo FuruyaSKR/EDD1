@@ -49,16 +49,17 @@ public class Fila {
         }
     }
     
-    public Integer remover () {
-    	if(estaVazio()) {
-    		return null;
-    	}
-    	int valor = inicio.getDado();
-    	inicio = inicio.getProx();
-    	tamanho--;
-    	if(estaVazio()) {
-    		fim = null;
-    	}
-    	return valor;
-    }
+    public Integer remover1() {
+        if (estaVazio()) {
+            return null;
+        }
+        int valor = inicio.getDado();
+        inicio = inicio.getProx();
+        tamanho--;
+        if (estaVazio()) {
+            fim = null;
+        }
+        return valor;
+    }
+
 }
