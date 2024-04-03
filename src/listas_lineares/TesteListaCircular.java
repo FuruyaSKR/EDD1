@@ -11,7 +11,7 @@ public class TesteListaCircular {
 	        
 	     System.out.println(lista.mostrarLista());
 	     
-	     System.out.println("Lista após valor removido");
+	     System.out.println("Lista apos valor removido");
 	     lista.deleteComValor(5);
 	     System.out.println(lista.mostrarLista());
 	        

@@ -4,5 +4,5 @@
 /**
  * 
  */
-module Estrutura_de_dados2024 {
+module EDD1 {
 }
