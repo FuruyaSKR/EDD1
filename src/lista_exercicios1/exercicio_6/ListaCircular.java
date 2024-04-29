@@ -3,48 +3,46 @@ package lista_exercicios1.exercicio_6;
 public class ListaCircular {
 	private Nodo inicio;
 	private Nodo fim;
-	
+
 	public ListaCircular() {
 		inicio = null;
 	}
-	
+
 	public Nodo getinicio() {
 		return inicio;
 	}
-	
-	public boolean vazia() {
-		return inicio == null;
-	}
-	
+
 	public void inserirInicio(int dado) {
 		Nodo novoNodo = new Nodo(dado);
-		if(inicio == null) { //Caso a lista esteja vazia
+		if (inicio == null) { // Caso a lista esteja vazia
 			inicio = novoNodo;
 			inicio.setProx(inicio);
 			fim = inicio;
-		}else {//Caso a lista não esteja vazia
+		} else {// Caso a lista não esteja vazia
 			novoNodo.setProx(inicio);
 			inicio = novoNodo;
 			fim.setProx(inicio);
 		}
 	}
-	
-	public String mostrarLista() {
-		String lista = "";
-		if(inicio == null) return lista;
-		Nodo aux = inicio;
+
+	public void mostrarLista() {
+		if (inicio == null) {
+			System.out.println("A lista está vazia.");
+			return;
+		}
+		Nodo atual = inicio;
 		do {
-			lista += aux.getDado()+"\n";
-			aux = aux.getProx();	
-		}while (aux != inicio);
-		return lista;
+			System.out.print(atual.getDado() + " ");
+			atual = atual.getProx();
+		} while (atual != inicio);
+		System.out.println(); // Quebra de linha no final para separar as listas
 	}
 
 	public void deleteComValor(int dado) {
 		if (inicio == null)
 			return;
 		if (inicio.getDado() == dado) {
-			if (inicio == fim) { //se a lista tiver somente 1 elemento
+			if (inicio == fim) { // se a lista tiver somente 1 elemento
 				inicio = null;
 				return;
 			}
@@ -62,50 +60,82 @@ public class ListaCircular {
 			aux = aux.getProx();
 		} while (aux != inicio);
 	}
-	
-	public void inserirFinal(int dado) {
-		Nodo novoNodo = new Nodo(dado);
-		if (vazia()) {
+
+	public void inserirOrdenado(int valor) {
+		Nodo novoNodo = new Nodo(valor);
+		if (inicio == null) {
 			inicio = novoNodo;
-			inicio.setProx(inicio); // Lista circular, o próximo do último nó aponta para o primeiro
+			fim = novoNodo;
+			fim.setProx(inicio);
+		} else if (valor <= inicio.getDado()) { // Inserção antes do início
+			novoNodo.setProx(inicio);
+			fim.setProx(novoNodo);
+			inicio = novoNodo;
 		} else {
-			Nodo aux = inicio;
-			while (aux.getProx() != inicio) {
-				aux = aux.getProx();
+			Nodo atual = inicio;
+			while (atual.getProx() != inicio && atual.getProx().getDado() < valor) {
+				atual = atual.getProx();
 			}
-			aux.setProx(novoNodo);
-			novoNodo.setProx(inicio); // O próximo do novo nó aponta para o primeiro
+			novoNodo.setProx(atual.getProx());
+			atual.setProx(novoNodo);
+			if (atual == fim) {
+				fim = novoNodo; // Atualização do fim se necessário
+			}
 		}
 	}
 
-	public ListaCircular combinarListas(ListaCircular lista1, ListaCircular lista2) {
-        ListaCircular listaResultante = new ListaCircular();
-        
-        Nodo nodoLista1 = lista1.getinicio();
-        Nodo nodoLista2 = lista2.getinicio();
-        
-        while (nodoLista1 != null || nodoLista2 != null) {
-            if (nodoLista1 == null) {
-                listaResultante.inserirFinal(nodoLista2.getDado());
-                nodoLista2 = nodoLista2.getProx();
-            } else if (nodoLista2 == null) {
-                listaResultante.inserirFinal(nodoLista1.getDado());
-                nodoLista1 = nodoLista1.getProx();
-            } else {
-                int dadoLista1 = nodoLista1.getDado();
-                int dadoLista2 = nodoLista2.getDado();
-                
-                if (dadoLista1 < dadoLista2) {
-                    listaResultante.inserirFinal(dadoLista1);
-                    nodoLista1 = nodoLista1.getProx();
-                } else {
-                    listaResultante.inserirFinal(dadoLista2);
-                    nodoLista2 = nodoLista2.getProx();
-                }
-            }
-        }
-        
-        return listaResultante;
-    }
+	public static ListaCircular combinarListas(ListaCircular lista1, ListaCircular lista2) {
+		ListaCircular listaCombinada = new ListaCircular();
+		Nodo atual1 = lista1.inicio;
+		Nodo atual2 = lista2.inicio;
 
+		// Verifica se alguma das listas está vazia e retorna a outra como resultado
+		if (atual1 == null) {
+			return copiarLista(lista2);
+		} else if (atual2 == null) {
+			return copiarLista(lista1);
+		}
+
+		do {
+			if (atual1.getDado() <= atual2.getDado()) {
+				listaCombinada.inserirOrdenado(atual1.getDado());
+				atual1 = (atual1.getProx() != lista1.inicio) ? atual1.getProx() : null;
+			} else {
+				listaCombinada.inserirOrdenado(atual2.getDado());
+				atual2 = (atual2.getProx() != lista2.inicio) ? atual2.getProx() : null;
+			}
+
+			// Se um dos ponteiros alcançar o fim da lista, insere o restante da outra lista
+			if (atual1 == null) {
+				do {
+					listaCombinada.inserirOrdenado(atual2.getDado());
+					atual2 = (atual2.getProx() != lista2.inicio) ? atual2.getProx() : null;
+				} while (atual2 != null);
+				break; // Sai do loop principal após inserir todos os elementos restantes
+			} else if (atual2 == null) {
+				do {
+					listaCombinada.inserirOrdenado(atual1.getDado());
+					atual1 = (atual1.getProx() != lista1.inicio) ? atual1.getProx() : null;
+				} while (atual1 != null);
+				break; // Sai do loop principal após inserir todos os elementos restantes
+			}
+		} while (atual1 != null || atual2 != null);
+
+		return listaCombinada;
+	}
+
+	// Método auxiliar para copiar os elementos de uma lista circular existente
+	private static ListaCircular copiarLista(ListaCircular lista) {
+		ListaCircular novaLista = new ListaCircular();
+		if (lista.inicio == null) {
+			return novaLista; // Retorna uma nova lista vazia se a lista original estiver vazia
+		}
+		Nodo atual = lista.inicio;
+		do {
+			novaLista.inserirOrdenado(atual.getDado());
+			atual = atual.getProx();
+		} while (atual != lista.inicio);
+
+		return novaLista;
+	}
 }
