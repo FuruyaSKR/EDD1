@@ -1,9 +1,11 @@
 package trab_restaurante.gestão_cliente;
 
-public class ListaEncadeada {
+import trab_restaurante.gestão_mesas.Mesa;
+
+public class ListaEncadeadaClientes {
     private Cliente inicio;
 
-    public ListaEncadeada() {
+    public ListaEncadeadaClientes() {
         inicio = null;
     }
 
@@ -12,10 +14,10 @@ public class ListaEncadeada {
     }
 
     // Inserir cliente
-    public void inserirCliente(String nome, int id) {
-        Cliente novoNodo = new Cliente(nome, id);
+    public Cliente inserirCliente(String nome, int id, int totalPessoas) {
+        Cliente novoNodo = new Cliente(nome, id, totalPessoas);
         novoNodo.setProx(inicio);
-        inicio = novoNodo;
+        return inicio = novoNodo;
     }
 
     // Remoção de clientes
@@ -58,10 +60,15 @@ public class ListaEncadeada {
         }
         Cliente aux = inicio;
         while (aux != null) {
-            System.out.println("Cliente ID: " + aux.getId() + ", Nome: " + aux.getNome());
+            System.out.println("Cliente ID: " + aux.getId() + ", Nome: " + aux.getNome() + ", Total de pessoas: "
+                    + aux.getTotalPessoas());
             aux = aux.getProx();
         }
         System.out.println("");
     }
 
+    // Método para obter a primeira mesa
+    public Cliente getInicio() {
+        return inicio;
+    }
 }

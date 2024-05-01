@@ -2,11 +2,11 @@ package trab_restaurante.gestão_cliente;
 
 public class Main {
     public static void main(String[] args) {
-        ListaEncadeada listaDeClientes = new ListaEncadeada();
+        Cliente listaDeClientes = new Cliente();
 
         // Insere clientes
-        listaDeClientes.inserirCliente("Alice Johnson", 1);
-        listaDeClientes.inserirCliente("Bob Smith", 2);
+        listaDeClientes.inserirCliente("Alice Johnson", 1, 4);
+        listaDeClientes.inserirCliente("Bob Smith", 2, 2);
 
         System.out.println("\nLista de clientes atual:");
         listaDeClientes.consultarClientes();
