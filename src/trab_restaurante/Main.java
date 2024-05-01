@@ -1,30 +1,45 @@
 package trab_restaurante;
 
+import trab_restaurante.fluxo_atendimento.FluxoDeAtendimento;
 import trab_restaurante.gestão_cliente.Cliente;
+import trab_restaurante.gestão_funcionarios.Funcionario;
 import trab_restaurante.gestão_mesas.Mesa;
+import trab_restaurante.gestão_pedidos.Pedido;
 
 public class Main {
     public static void main(String[] args) {
-        Cliente listaDeClientes = new Cliente();
-        Mesa listaDeMesas = new Mesa();
+        FluxoDeAtendimento fluxoDeAtendimento = new FluxoDeAtendimento();
 
-        // Cria mesas no restaurante
-        Mesa[] mesas = new Mesa[6];
-        mesas[0] = listaDeMesas.criarMesa(1, 2, 0);
-        mesas[1] = listaDeMesas.criarMesa(2, 2, 0);
-        mesas[2] = listaDeMesas.criarMesa(3, 4, 0);
-        mesas[3] = listaDeMesas.criarMesa(4, 4, 0);
-        mesas[4] = listaDeMesas.criarMesa(5, 6, 0);
-        mesas[5] = listaDeMesas.criarMesa(6, 6, 0);
+        // Mesas do restaurante
+        Mesa[] mesas = {
+                new Mesa(1, 2, 0),
+                new Mesa(2, 4, 0),
+                new Mesa(3, 6, 0),
+        };
 
-        // Insere clientes
-        Cliente[] clientes = new Cliente[6];
-        clientes[0] = listaDeClientes.inserirCliente("Alice Johnson", 1, 4);
-        clientes[1] = listaDeClientes.inserirCliente("Bob Smith", 2, 4);
-        clientes[2] = listaDeClientes.inserirCliente("Bryan Souza", 3, 5);
-        clientes[3] = listaDeClientes.inserirCliente("Arcideval Carvalho", 4, 5);
-        clientes[4] = listaDeClientes.inserirCliente("Rodinei Alfredo", 5, 2);
-        clientes[5] = listaDeClientes.inserirCliente("Valdecir Cardoso", 6, 3);
+        // Clientes
+        Cliente cliente1 = new Cliente("Alice", 1, 2);
+        Cliente cliente2 = new Cliente("Bob", 2, 4);
 
+        // Funcionários
+        Funcionario garcom = new Funcionario(1, "Carlos", "Garçom", "Tarde");
+        Funcionario cozinheiro = new Funcionario(2, "Paula", "Cozinheiro", "Noite");
+
+        // Pedidos
+        Pedido pedido1 = new Pedido(1, "Pizza", "Recebido");
+        Pedido pedido2 = new Pedido(2, "Macarrão", "Recebido");
+
+        // Simulação do fluxo
+        fluxoDeAtendimento.encaminharClienteParaMesa(cliente1, mesas);
+        fluxoDeAtendimento.encaminharClienteParaMesa(cliente2, mesas);
+
+        fluxoDeAtendimento.atenderPedidoGarcom(pedido1, garcom);
+        fluxoDeAtendimento.atenderPedidoGarcom(pedido2, garcom);
+
+        fluxoDeAtendimento.prepararPedidoCozinheiro(pedido1, cozinheiro);
+        fluxoDeAtendimento.prepararPedidoCozinheiro(pedido2, cozinheiro);
+
+        fluxoDeAtendimento.entregarPedido(pedido1, cliente1);
+        fluxoDeAtendimento.fecharConta(cliente1, 100.0);
     }
 }

@@ -3,15 +3,15 @@ package trab_restaurante.gestão_pedidos;
 public class Main {
     public static void main(String[] args) {
         Pedido filaDePedidos = new Pedido(5);
-        filaDePedidos.inserirPedido(1, "Hambúrguer");
-        filaDePedidos.inserirPedido(2, "Pizza");
+        filaDePedidos.inserirPedido(1, "Hambúrguer", "Recebido");
+        filaDePedidos.inserirPedido(2, "Pizza", "Recebido");
 
         // Exibir pedidos realizados
         System.out.println("Pedidos realizados:");
         filaDePedidos.consultaPedidosRegistrados();
 
         // Atualizar pedido
-        filaDePedidos.atualizarPedido(1, "Hambúrguer com batata frita");
+        filaDePedidos.atualizarPedido(1, "Hambúrguer com batata frita", "Em andamento");
 
         // Exibir pedidos realizados
         System.out.println("Lista de Pedidos atualizada:");

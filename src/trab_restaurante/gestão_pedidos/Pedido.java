@@ -3,15 +3,17 @@ package trab_restaurante.gestão_pedidos;
 public class Pedido {
     private int id;
     private String descricao;
+    private String status;
     private Pedido prox;
     private Pedido inicio;
     private Pedido fim;
     private int limite;
     private int tamanho = 0;
 
-    public Pedido(int id, String descricao) {
+    public Pedido(int id, String descricao, String status) {
         this.id = id;
         this.descricao = descricao;
+        this.status = status;
         this.prox = null;
         this.inicio = null;
     }
@@ -45,6 +47,14 @@ public class Pedido {
         this.prox = prox;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getTamanho() {
         return tamanho;
     }
@@ -65,13 +75,12 @@ public class Pedido {
             System.out.println("Fila está vazia!");
             return null;
         }
-
     }
 
     // Inserir pedido
-    public void inserirPedido(int id, String descricao) {
+    public void inserirPedido(int id, String descricao, String status) {
         if (temEspaco()) {
-            Pedido novoItem = new Pedido(id, descricao);
+            Pedido novoItem = new Pedido(id, descricao, status);
             if (estaVazio()) {
                 inicio = novoItem;
                 fim = novoItem;
@@ -86,11 +95,12 @@ public class Pedido {
     }
 
     // Atualização de pedidos
-    public void atualizarPedido(int id, String novaDescricao) {
+    public void atualizarPedido(int id, String novaDescricao, String novoStatus) {
         Pedido atual = inicio;
         while (atual != null) {
             if (atual.getId() == id) {
                 atual.setDescricao(novaDescricao);
+                atual.setStatus(novoStatus);
                 System.out.println("Pedido atualizado com sucesso.");
                 return;
             }
@@ -104,7 +114,9 @@ public class Pedido {
     public void consultaPedidosRegistrados() {
         Pedido aux = inicio;
         while (aux != null) {
-            System.out.println("Pedido ID: " + aux.getId() + ", Descrição: " + aux.getDescricao());
+            System.out
+                    .println("Pedido ID: " + aux.getId() + ", Descrição: " + aux.getDescricao() + ", Status do pedido: "
+                            + aux.getStatus());
             aux = aux.getProx();
         }
         System.out.println("");
