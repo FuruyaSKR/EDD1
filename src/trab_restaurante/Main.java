@@ -1,15 +1,12 @@
 package trab_restaurante;
 
-import trab_restaurante.fluxo_atendimento.FluxoDeAtendimento;
 import trab_restaurante.gestão_cliente.Cliente;
-import trab_restaurante.gestão_cliente.ListaEncadeadaClientes;
-import trab_restaurante.gestão_mesas.ListaEncadeadaMesas;
 import trab_restaurante.gestão_mesas.Mesa;
 
 public class Main {
     public static void main(String[] args) {
-        ListaEncadeadaClientes listaDeClientes = new ListaEncadeadaClientes();
-        ListaEncadeadaMesas listaDeMesas = new ListaEncadeadaMesas();
+        Cliente listaDeClientes = new Cliente();
+        Mesa listaDeMesas = new Mesa();
 
         // Cria mesas no restaurante
         Mesa[] mesas = new Mesa[6];
@@ -28,10 +25,6 @@ public class Main {
         clientes[3] = listaDeClientes.inserirCliente("Arcideval Carvalho", 4, 5);
         clientes[4] = listaDeClientes.inserirCliente("Rodinei Alfredo", 5, 2);
         clientes[5] = listaDeClientes.inserirCliente("Valdecir Cardoso", 6, 3);
-
-        // Encaminha todos os clientes para mesas disponíveis
-        FluxoDeAtendimento fluxoDeAtendimento = new FluxoDeAtendimento();
-        fluxoDeAtendimento.encaminharClientesParaMesas(mesas, clientes);
 
     }
 }

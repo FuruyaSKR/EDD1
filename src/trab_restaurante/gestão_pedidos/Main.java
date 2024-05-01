@@ -2,7 +2,7 @@ package trab_restaurante.gestão_pedidos;
 
 public class Main {
     public static void main(String[] args) {
-        Fila filaDePedidos = new Fila(5);
+        Pedido filaDePedidos = new Pedido(5);
         filaDePedidos.inserirPedido(1, "Hambúrguer");
         filaDePedidos.inserirPedido(2, "Pizza");
 

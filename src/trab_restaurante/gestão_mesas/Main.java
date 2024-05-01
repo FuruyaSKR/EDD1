@@ -1,13 +1,12 @@
 package trab_restaurante.gestão_mesas;
 
 import trab_restaurante.gestão_cliente.Cliente;
-import trab_restaurante.gestão_cliente.ListaEncadeadaClientes;
 
 public class Main {
     public static void main(String[] args) {
 
-        ListaEncadeadaMesas listaDeMesas = new ListaEncadeadaMesas();
-        ListaEncadeadaClientes listaDeClientes = new ListaEncadeadaClientes();
+        Mesa listaDeMesas = new Mesa();
+        Cliente listaDeClientes = new Cliente();
 
         // Insere clientes
         Cliente cliente1 = listaDeClientes.inserirCliente("Alice Johnson", 1, 2);

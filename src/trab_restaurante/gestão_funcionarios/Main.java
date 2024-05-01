@@ -2,7 +2,7 @@ package trab_restaurante.gestão_funcionarios;
 
 public class Main {
     public static void main(String[] args) {
-        ListaEncadeadaFuncionarios listaDeFuncionarios = new ListaEncadeadaFuncionarios();
+        Funcionario listaDeFuncionarios = new Funcionario();
 
         listaDeFuncionarios.cadastrarFuncionario(1, "João Silva", "Garçom", "Manhã");
         listaDeFuncionarios.cadastrarFuncionario(2, "Ana Souza", "Cozinheira", "Noite");
