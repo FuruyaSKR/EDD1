@@ -2,7 +2,7 @@ package tad;
 
 public class main {
 
-	public static void main(String[] args) {
+	public static void Main(String[] args) {
 		SomaMultiplica ex0 = new SomaMultiplica(3,5);
 		System.out.println("Soma = "+ex0.soma());
 		
