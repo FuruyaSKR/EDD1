@@ -49,4 +49,25 @@ public class HashTable3 {
 		}
 		return null;
 	}
+
+	// Exercicio
+	public boolean chaveExiste(String chave) {
+		int indiceArray = hash(chave);
+		if (array[indiceArray] == null) {
+			return false;
+		}
+		Nodo aux = array[indiceArray].getInicio();
+		while (aux != null) {
+			if (aux.getChave().equals(chave)) {
+				return true;
+			}
+			aux = aux.getProx();
+		}
+		return false;
+	}
+
+	public void deletarChave(String chave) {
+		int indiceArray = hash(chave);
+		array[indiceArray].deleteComValor(chave);
+	}
 }
