@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "EDD1/metodos_ordenação.Main",
+      "projectName": "Estrutura_de_dados2024"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)",
+      "request": "launch",
+      "mainClass": "BubbleSort",
+      "classPaths": ["libs/xchart-3.8.8.jar"]
+    }
+  ]
+}

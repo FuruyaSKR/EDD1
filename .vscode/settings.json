@@ -1,0 +1,4 @@
+{
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.project.referencedLibraries": ["lib/xchart-3.8.0.jar"]
+}
