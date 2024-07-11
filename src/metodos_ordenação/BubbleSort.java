@@ -28,7 +28,13 @@ public class BubbleSort {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     trocas++;
+                    // Imprimir o estado atual do array após uma troca
+                    System.out.println("Troca: " + trocas + " - Estado do array: " + java.util.Arrays.toString(array));
                 }
+                // Imprimir o estado do array após cada comparação
+                System.out.println(
+                        "Comparação: " + comparacoes + " - Estado do array: " + java.util.Arrays.toString(array));
+
             }
         }
         return array;
